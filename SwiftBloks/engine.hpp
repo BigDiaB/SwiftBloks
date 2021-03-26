@@ -58,6 +58,8 @@ public:
     void setBGcolor(RGBAcolor c);
     
     int getID();
+    vec4i calcQuad(int w, int h, int xid, int yid);
+    vec4i calcQuad(int h, int xid, int yid);
     tile newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame);
     tile newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
     tile newTile(float x, float y, int w, int h, SDL_Surface* pic);

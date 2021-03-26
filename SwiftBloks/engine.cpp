@@ -264,6 +264,28 @@ int ENGINE::getID()
     return id;
 }
 
+vec4i ENGINE::calcQuad(int w, int h, int xid, int yid)
+{
+    vec4i quad;
+    quad.x = (w + 1) * (xid - 1);
+    quad.y = (h + 1) * (yid - 1);
+    quad.w = w;
+    quad.h = h;
+    
+    return quad;
+}
+
+vec4i ENGINE::calcQuad(int h, int xid, int yid)
+{
+    vec4i quad;
+    quad.x = (h + 1) * (xid - 1);
+    quad.y = (h + 1) * (yid - 1);
+    quad.w = h;
+    quad.h = h;
+    
+    return quad;
+}
+
 void ENGINE::debug(tile t)
 {
     for (int i = 0; i < index; i++)

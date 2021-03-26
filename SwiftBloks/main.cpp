@@ -13,7 +13,7 @@ int main()
 {
 
 #include "baseColors.h"
-    auto t = e.newTile(200, 200,e.newImage((char*)"assets/test.png"),16,0,16,32);
+    auto t = e.newTile(200, 200,e.newImage((char*)"assets/test.png"),e.calcQuad(16,1,1));
     e.setScale(8, 8);
     
     while(e.isRunning())
