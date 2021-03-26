@@ -15,15 +15,16 @@ class tile
     vec2f pos;
     vec2f vel;
     vec2i size;
+    bool isQuad = false;
 public:
     int id;
     RGBAcolor color;
     SDL_Surface* img;
-    vec2i quad;
+    vec4i quad;
     
-    void loop(int id);
-    void load(float x, float y, SDL_Surface* pic);
-    void load(float x, float y, SDL_Surface* pic, vec2i quad_pos);
+    void loop(float id);
+    void load(float x, float y, int w, int h, SDL_Surface* pic);
+    void load(float x, float y, int w, int h, SDL_Surface* pic, vec4i quad_pos);
     void move(float nx, float ny);
     
     vec2f getPos();

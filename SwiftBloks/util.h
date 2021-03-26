@@ -32,14 +32,28 @@ struct RGBAcolor
 
 struct vec2f
 {
-    float x;
-    float y;
+    float x = 1;
+    float y = 1;
 };
 
 struct vec2i
 {
-    int x;
-    int y;
+    int x = 1;
+    int y = 1;
+};
+
+struct vec4i
+{
+    int x = 1;
+    int y = 1;
+    int w = 1;
+    int h = 1;
+};
+
+struct body
+{
+    vec2f pos;
+    vec2i size;
 };
 
 #endif /* util_h */

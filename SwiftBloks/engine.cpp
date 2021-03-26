@@ -4,11 +4,23 @@
 //
 //  Created by Benjamin Emde on 23.03.21.
 //
-
+#include "define.h"
 #include "engine.hpp"
 #include <iostream>
 
-ENGINE::ENGINE(int w, int h)
+float ENGINE::getDelta()
+{
+    return dt;
+}
+
+void ENGINE::tick()
+    {
+        unsigned int tick_time = SDL_GetTicks();
+        dt = (tick_time - last_tick_time) * 0.001;
+        last_tick_time = tick_time;
+    }
+
+ENGINE::ENGINE(char* name, int w, int h)
 {
 #include "baseColors.h"
     
@@ -16,7 +28,8 @@ ENGINE::ENGINE(int w, int h)
     WIDTH = w;
     HEIGHT = h;
     SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC, &window, &renderer);
+    window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 }
 
 void ENGINE::loop()
@@ -58,6 +71,7 @@ bool ENGINE::isRunning()
         SDL_DestroyRenderer(renderer);
         SDL_Quit();
     }
+    tick();
     return running;
 }
 
@@ -101,22 +115,21 @@ void ENGINE::draw(float x, float y, SDL_Surface* surf, float sx, float sy)
     SDL_DestroyTexture(tex);
 }
 
-void ENGINE::draw(float x, float y, SDL_Surface* surf, int xa, int ya, int w, int h)
+void ENGINE::draw(tile t)
 {
     SDL_Rect quad;
     SDL_Rect body;
+    body.w = t.getSize().x * SCALE_X;
+    body.h = t.getSize().y * SCALE_Y;
+    body.x = t.getPos().x;
+    body.y = t.getPos().y;
     
-    quad.x = xa;
-    quad.y = ya;
-    quad.w = w;
-    quad.h = h;
+    quad.x = t.quad.x;
+    quad.y = t.quad.y;
+    quad.w = t.quad.w;
+    quad.h = t.quad.h;
     
-    body.x = x;
-    body.y = y;
-    body.w = w * SCALE_X;
-    body.h = h * SCALE_Y;
-    
-    auto tex = SDL_CreateTextureFromSurface(renderer, surf);
+    auto tex = SDL_CreateTextureFromSurface(renderer, t.img);
     SDL_RenderCopy(renderer, tex, &quad, &body);
     SDL_DestroyTexture(tex);
 }
@@ -203,20 +216,34 @@ void ENGINE::setBGcolor(RGBAcolor c)
     BGcolor.a = c.a;
 }
 
-tile ENGINE::newTile(float x, float y, SDL_Surface* pic, vec2i quad_pos)
+tile ENGINE::newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame)
 {
     tile t;
-    t.load(x, y, pic,quad_pos);
+    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
+    if (tiles[index] == NULL)
+        tiles[index] = &t;
+    t.id = getID();
+    return t;
+}
+tile ENGINE::newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
+{
+    tile t;
+    vec4i quad_frame;
+    quad_frame.x = xa;
+    quad_frame.y = ya;
+    quad_frame.w = w;
+    quad_frame.h = h;
+    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
     if (tiles[index] == NULL)
         tiles[index] = &t;
     t.id = getID();
     return t;
 }
 
-tile ENGINE::newTile(float x, float y, SDL_Surface* pic)
+tile ENGINE::newTile(float x, float y, int w, int h, SDL_Surface* pic)
 {
     tile t;
-    t.load(x, y, pic);
+    t.load(x, y, w, h, pic);
     if (tiles[index] == NULL)
         tiles[index] = &t;
     t.id = getID();
@@ -237,10 +264,10 @@ int ENGINE::getID()
     return id;
 }
 
-void ENGINE::test()
+void ENGINE::debug(tile t)
 {
     for (int i = 0; i < index; i++)
     {
-        draw(tiles[i]->getPos().x, tiles[i]->getPos().y, tiles[i]->img);
+        tiles[i]->loop(dt);
     }
 }

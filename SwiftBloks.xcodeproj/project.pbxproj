@@ -47,6 +47,7 @@
 /* Begin PBXFileReference section */
 		4F9DE2BC260CFF87007FCDD0 /* objects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = objects.cpp; sourceTree = "<group>"; };
 		4F9DE2BD260CFF87007FCDD0 /* objects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = objects.hpp; sourceTree = "<group>"; };
+		4F9DE2BF260E0C3B007FCDD0 /* define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		4FB4527B2608FBA800758A2F /* SwiftBloks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftBloks; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB4527E2608FBA800758A2F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4FB452872608FBD600758A2F /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -112,6 +113,7 @@
 				4FB452BC260CA23000758A2F /* baseColors.h */,
 				4F9DE2BC260CFF87007FCDD0 /* objects.cpp */,
 				4F9DE2BD260CFF87007FCDD0 /* objects.hpp */,
+				4F9DE2BF260E0C3B007FCDD0 /* define.h */,
 			);
 			path = SwiftBloks;
 			sourceTree = "<group>";

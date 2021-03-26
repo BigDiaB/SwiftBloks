@@ -15,8 +15,6 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "objects.hpp"
-#define ENT_NUM 5
-#define TILE_NUM 5
 
 class ENGINE
 {
@@ -34,32 +32,39 @@ class ENGINE
     int index = 0;
     int idblacklist[ENT_NUM + TILE_NUM];
     tile* tiles[TILE_NUM];
+    unsigned int last_tick_time = 0;
+    float dt = 0;
+    void tick();
 public:
-    RGBAcolor color;
-    ENGINE(int w, int h);
+    float getDelta();
+    ENGINE(char* name, int w, int h);
     void loop();
     bool isRunning();
     bool isDown(int key);
     SDL_Surface* newImage(char* path);
+    
     void draw(float x, float y, SDL_Surface* surf);
     void draw(float x, float y, SDL_Surface* surf, float sx, float sy);
-    void draw(float x, float y, SDL_Surface* surf, int xa, int ya, int w, int h);
+    void draw(tile t);
     void draw(float x, float y, SDL_Surface* surf, int xa, int ya, int w, int h, float sx, float sy);
+    
     void rect(bool fill, float x, float y, int w, int h);
     void rect(bool fill, float x, float y, int w, int h, float sx, float sy);
+    
     void setScale(float newX, float newY);
     void setIMGRGB(SDL_Surface* surf, RGBAcolor c);
     void setIMGALPHA(SDL_Surface* surf, int alpha);
     void setColor(RGBAcolor c);
     void setBGcolor(RGBAcolor c);
+    
     int getID();
-    tile newTile(float x, float y, SDL_Surface* pic, vec2i quad_pos);
-    tile newTile(float x, float y, SDL_Surface* pic);
+    tile newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame);
+    tile newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
+    tile newTile(float x, float y, int w, int h, SDL_Surface* pic);
     
     
     
-    
-    
-    void test();
+    RGBAcolor color;
+    void debug(tile t);
 };
 #endif /* engine_hpp */
