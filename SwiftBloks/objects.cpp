@@ -14,8 +14,6 @@ void tile::loop(float dt)
     rotate(false, dt * 10);
     pos.x += (vel.x * dt);
     pos.y += (vel.y * dt);
-    vel.x *= pow(0.002, dt);
-    vel.y *= pow(0.002, dt);
     e.draw(*this);
 
 }
@@ -42,8 +40,8 @@ void tile::load(float x, float y, int w, int h, SDL_Surface* pic, vec4i quad_fra
 
 void tile::move(float nx, float ny)
 {
-    vel.x += nx;
-    vel.y += ny;
+    pos.x += nx;
+    pos.y += ny;
 }
 
 void tile::rotate(bool set, double rot)
@@ -62,10 +60,7 @@ vec2i tile::getSize()
 {
     return size;
 }
-vec2f tile::getVel()
-{
-    return vel;
-}
+
 double tile::getRotation()
 {
     return rotation;
@@ -99,4 +94,15 @@ void player::movement(float dt)
 void player::render()
 {
         e.draw(*this);
+}
+
+vec2f player::getVel()
+{
+    return vel;
+}
+
+void player::move(float nx, float ny)
+{
+    vel.x += nx;
+    vel.y += ny;
 }

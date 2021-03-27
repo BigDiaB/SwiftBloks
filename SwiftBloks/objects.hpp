@@ -41,6 +41,8 @@ class player : public tile
 {
     void movement(float dt);
 public:
+    void move(float nx, float ny); 
+    vec2f getVel();
     int layer = 3;
     void loop(float dt) override;
     void render();
