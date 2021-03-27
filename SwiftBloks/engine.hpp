@@ -63,6 +63,12 @@ public:
     tile newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame);
     tile newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
     tile newTile(float x, float y, int w, int h, SDL_Surface* pic);
+    tile newTile(float x, float y, SDL_Surface* pic);
+    
+    player newPlayer(float x, float y, SDL_Surface* pic, vec4i quad_frame);
+    player newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
+    player newPlayer(float x, float y, int w, int h, SDL_Surface* pic);
+    player newPlayer(float x, float y, SDL_Surface* pic);
     
     
     

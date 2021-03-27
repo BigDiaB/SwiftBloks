@@ -9,26 +9,38 @@
 #include <iostream>
 ENGINE e(WINDOW_NAME,WINDOW_WIDTH,WINDOW_HEIGHT);
 
+
 int main()
 {
 
-#include "baseColors.h"
-    auto t = e.newTile(200, 200,e.newImage((char*)"assets/test.png"),e.calcQuad(16,1,1));
+//#include "baseColors.h"
+    auto t = e.newPlayer(200, 200,e.newImage((char*)"assets/test.png"),e.calcQuad(32,1,1));
+//    auto g = e.newTile(200, 200, e.newImage((char*)"assets/test.png"));
     e.setScale(8, 8);
     
     while(e.isRunning())
     {
         float  dt = e.getDelta();
         t.loop(dt);
-        if (e.isDown(SDLK_a) and not e.isDown(SDLK_d))
-            t.move(-100,0);
-        elseif (e.isDown(SDLK_d) and not e.isDown(SDLK_a))
-            t.move(100,0);
-        if (e.isDown(SDLK_w) and not e.isDown(SDLK_s))
-            t.move(0,-100);
-        elseif (e.isDown(SDLK_s) and not e.isDown(SDLK_w))
-            t.move(0,100);
         
     }
     return 0;
+}
+
+
+float Q_rsqrt(float number)
+{
+    long i;
+    float x2, y;
+    const float threehalfs = 1.5f;
+    
+    x2 = number * 0.5f;
+    y = number;
+    i = * ( long * ) &y;
+    i = 0x5f3759df - ( i >> 1 );
+    y = * ( float * ) &i;
+    y = y * ( threehalfs - ( x2 * y * y ) );
+//    y = y * ( threehalfs - ( x2 * y * y ) );
+    
+    return y;
 }

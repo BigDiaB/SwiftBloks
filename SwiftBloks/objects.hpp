@@ -12,24 +12,35 @@
 
 class tile
 {
+protected:
     vec2f pos;
     vec2f vel;
     vec2i size;
-    bool isQuad = false;
+    double rotation = 0;
 public:
+    bool isQuad = false;
     int id;
     RGBAcolor color;
     SDL_Surface* img;
     vec4i quad;
     
-    void loop(float id);
+    virtual void loop(float dt);
     void load(float x, float y, int w, int h, SDL_Surface* pic);
     void load(float x, float y, int w, int h, SDL_Surface* pic, vec4i quad_pos);
     void move(float nx, float ny);
+    void rotate(bool set, double rot);
     
     vec2f getPos();
     vec2i getSize();
     vec2f getVel();
+    double getRotation();
 };
 
+class player : public tile
+{
+    void movement(float dt);
+public:
+    void loop(float dt) override;
+    void render();
+};
 #endif /* objects_hpp */

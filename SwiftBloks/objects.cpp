@@ -47,6 +47,14 @@ void tile::move(float nx, float ny)
     vel.y += ny;
 }
 
+void tile::rotate(bool set, double rot)
+{
+    if (!set)
+        rotation += rot;
+    else
+        rotation = rot;
+}
+
 vec2f tile::getPos()
 {
     return pos;
@@ -58,4 +66,41 @@ vec2i tile::getSize()
 vec2f tile::getVel()
 {
     return vel;
+}
+double tile::getRotation()
+{
+    return rotation;
+}
+
+void player::loop(float dt)
+{
+    movement(dt);
+    render();
+    
+    if (e.isDown(SDLK_r))
+        rotate(false, dt * 200);
+    if (e.isDown(SDLK_a) and not e.isDown(SDLK_d))
+        move(-100,0);
+    elseif (e.isDown(SDLK_d) and not e.isDown(SDLK_a))
+        move(100,0);
+    if (e.isDown(SDLK_w) and not e.isDown(SDLK_s))
+        move(0,-100);
+    elseif (e.isDown(SDLK_s) and not e.isDown(SDLK_w))
+        move(0,100);
+}
+
+void player::movement(float dt)
+{
+    pos.x += (vel.x * dt);
+    pos.y += (vel.y * dt);
+    vel.x *= pow(0.002, dt);
+    vel.y *= pow(0.002, dt);
+}
+
+void player::render()
+{
+    if (isQuad)
+        e.draw(*this);
+    else
+        e.draw(pos.x, pos.y, img);
 }

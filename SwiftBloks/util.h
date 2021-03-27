@@ -50,10 +50,4 @@ struct vec4i
     int h = 1;
 };
 
-struct body
-{
-    vec2f pos;
-    vec2i size;
-};
-
 #endif /* util_h */

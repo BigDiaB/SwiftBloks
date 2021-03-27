@@ -124,15 +124,25 @@ void ENGINE::draw(tile t)
     body.x = t.getPos().x;
     body.y = t.getPos().y;
     
+    if (t.isQuad)
+    {
     quad.x = t.quad.x;
     quad.y = t.quad.y;
     quad.w = t.quad.w;
     quad.h = t.quad.h;
-    
     auto tex = SDL_CreateTextureFromSurface(renderer, t.img);
-    SDL_RenderCopy(renderer, tex, &quad, &body);
+    SDL_RenderCopyEx(renderer, tex, &quad, &body, t.getRotation(), nullptr, SDL_FLIP_NONE);
     SDL_DestroyTexture(tex);
+    }
+    else
+    {
+        auto tex = SDL_CreateTextureFromSurface(renderer, t.img);
+        SDL_RenderCopy(renderer, tex, nullptr, &body);
+        SDL_DestroyTexture(tex);
+    }
+    
 }
+
 
 void ENGINE::draw(float x, float y, SDL_Surface* surf, int xa, int ya, int w, int h, float sx, float sy)
 {
@@ -243,6 +253,64 @@ tile ENGINE::newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, 
 tile ENGINE::newTile(float x, float y, int w, int h, SDL_Surface* pic)
 {
     tile t;
+    t.load(x, y, w, h, pic);
+    if (tiles[index] == NULL)
+        tiles[index] = &t;
+    t.id = getID();
+    return t;
+}
+
+tile ENGINE::newTile(float x, float y, SDL_Surface* pic)
+{
+    tile t;
+    int w = pic->w;
+    int h = pic->h;
+    t.load(x, y, w, h, pic);
+    if (tiles[index] == NULL)
+        tiles[index] = &t;
+    t.id = getID();
+    return t;
+}
+
+player ENGINE::newPlayer(float x, float y, SDL_Surface* pic, vec4i quad_frame)
+{
+    player t;
+    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
+    if (tiles[index] == NULL)
+        tiles[index] = &t;
+    t.id = getID();
+    return t;
+}
+player ENGINE::newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
+{
+    player t;
+    vec4i quad_frame;
+    quad_frame.x = xa;
+    quad_frame.y = ya;
+    quad_frame.w = w;
+    quad_frame.h = h;
+    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
+    if (tiles[index] == NULL)
+        tiles[index] = &t;
+    t.id = getID();
+    return t;
+}
+
+player ENGINE::newPlayer(float x, float y, int w, int h, SDL_Surface* pic)
+{
+    player t;
+    t.load(x, y, w, h, pic);
+    if (tiles[index] == NULL)
+        tiles[index] = &t;
+    t.id = getID();
+    return t;
+}
+
+player ENGINE::newPlayer(float x, float y, SDL_Surface* pic)
+{
+    player t;
+    int w = pic->w;
+    int h = pic->h;
     t.load(x, y, w, h, pic);
     if (tiles[index] == NULL)
         tiles[index] = &t;
