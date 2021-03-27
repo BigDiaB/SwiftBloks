@@ -12,8 +12,6 @@
 void tile::loop(float dt)
 {
     rotate(false, dt * 10);
-    pos.x += (vel.x * dt);
-    pos.y += (vel.y * dt);
     e.draw(*this);
 
 }

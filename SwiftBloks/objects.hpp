@@ -14,7 +14,6 @@ class tile
 {
 protected:
     vec2f pos;
-    vec2f vel;
     vec2i size;
     double rotation = 0;
 public:
@@ -41,6 +40,7 @@ class player : public tile
 {
     void movement(float dt);
 public:
+    vec2f vel;
     void move(float nx, float ny); 
     vec2f getVel();
     int layer = 3;
