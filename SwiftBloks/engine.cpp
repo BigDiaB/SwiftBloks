@@ -4,9 +4,11 @@
 //
 //  Created by Benjamin Emde on 23.03.21.
 //
+
 #include "define.h"
 #include "engine.hpp"
 #include <iostream>
+
 
 float ENGINE::getDelta()
 {
@@ -137,7 +139,7 @@ void ENGINE::draw(tile t)
     else
     {
         auto tex = SDL_CreateTextureFromSurface(renderer, t.img);
-        SDL_RenderCopy(renderer, tex, nullptr, &body);
+        SDL_RenderCopyEx(renderer, tex, nullptr, &body, t.getRotation(), nullptr, SDL_FLIP_NONE);
         SDL_DestroyTexture(tex);
     }
     
@@ -226,95 +228,87 @@ void ENGINE::setBGcolor(RGBAcolor c)
     BGcolor.a = c.a;
 }
 
-tile ENGINE::newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame)
+tile* ENGINE::newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame)
 {
-    tile t;
-    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    tile* t = new tile;
+    t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
-tile ENGINE::newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
+tile* ENGINE::newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
 {
-    tile t;
+    tile* t = new tile;
     vec4i quad_frame;
     quad_frame.x = xa;
     quad_frame.y = ya;
     quad_frame.w = w;
     quad_frame.h = h;
-    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
 
-tile ENGINE::newTile(float x, float y, int w, int h, SDL_Surface* pic)
+tile* ENGINE::newTile(float x, float y, int w, int h, SDL_Surface* pic)
 {
-    tile t;
-    t.load(x, y, w, h, pic);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    tile* t = new tile;
+    t->load(x, y, w, h, pic);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
 
-tile ENGINE::newTile(float x, float y, SDL_Surface* pic)
+tile* ENGINE::newTile(float x, float y, SDL_Surface* pic)
 {
-    tile t;
+    tile* t = new tile;
     int w = pic->w;
     int h = pic->h;
-    t.load(x, y, w, h, pic);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    t->load(x, y, w, h, pic);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
 
-player ENGINE::newPlayer(float x, float y, SDL_Surface* pic, vec4i quad_frame)
+player* ENGINE::newPlayer(float x, float y, SDL_Surface* pic, vec4i quad_frame)
 {
-    player t;
-    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    player* t = new player;
+    t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
-player ENGINE::newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
+player* ENGINE::newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
 {
-    player t;
+    player* t = new player;
     vec4i quad_frame;
     quad_frame.x = xa;
     quad_frame.y = ya;
     quad_frame.w = w;
     quad_frame.h = h;
-    t.load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
 
-player ENGINE::newPlayer(float x, float y, int w, int h, SDL_Surface* pic)
+player* ENGINE::newPlayer(float x, float y, int w, int h, SDL_Surface* pic)
 {
-    player t;
-    t.load(x, y, w, h, pic);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    player* t = new player;
+    t->load(x, y, w, h, pic);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
 
-player ENGINE::newPlayer(float x, float y, SDL_Surface* pic)
+player* ENGINE::newPlayer(float x, float y, SDL_Surface* pic)
 {
-    player t;
+    player* t = new player;
     int w = pic->w;
     int h = pic->h;
-    t.load(x, y, w, h, pic);
-    if (tiles[index] == NULL)
-        tiles[index] = &t;
-    t.id = getID();
+    t->load(x, y, w, h, pic);
+    t->id = getID();
+    Renderer.renderMe(t);
     return t;
 }
 
@@ -354,10 +348,56 @@ vec4i ENGINE::calcQuad(int h, int xid, int yid)
     return quad;
 }
 
-void ENGINE::debug(tile t)
+void ENGINE::debug()
 {
-    for (int i = 0; i < index; i++)
+    for (int l = 0; l < NUM_LAYERS; l++)
     {
-        tiles[i]->loop(dt);
+        for (int g = 0; g < TILE_NUM; g++)
+        {
+            if (Renderer.things[l].tiles[g] != NULL)
+                Renderer.things[l].tiles[g]->loop(dt);
+        }
+    }
+}
+
+void renderer::renderMe(tile* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+    if (things[t->layer].tiles[i] == NULL)
+    {
+        things[t->layer].tiles[i] = t;
+        break;
+    }
+    }
+}
+
+void renderer::destroyMe(tile* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+        if (t->id == things[t->layer].tiles[i]->id)
+            things[t->layer].tiles[i] = NULL;
+    }
+}
+
+void renderer::renderMe(player* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+    if (things[t->layer].tiles[i] == NULL)
+    {
+        things[t->layer].tiles[i] = t;
+        break;
+    }
+    }
+}
+
+void renderer::destroyMe(player* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+        if (t->id == things[t->layer].tiles[i]->id)
+            things[t->layer].tiles[i] = NULL;
     }
 }

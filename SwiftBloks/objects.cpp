@@ -11,14 +11,13 @@
 
 void tile::loop(float dt)
 {
+    rotate(false, dt * 10);
     pos.x += (vel.x * dt);
     pos.y += (vel.y * dt);
     vel.x *= pow(0.002, dt);
     vel.y *= pow(0.002, dt);
-    if (isQuad)
-        e.draw(*this);
-    else
-        e.draw(pos.x, pos.y, img);
+    e.draw(*this);
+
 }
 void tile::load(float x, float y, int w, int h, SDL_Surface* pic)
 {
@@ -99,8 +98,5 @@ void player::movement(float dt)
 
 void player::render()
 {
-    if (isQuad)
         e.draw(*this);
-    else
-        e.draw(pos.x, pos.y, img);
 }

@@ -18,6 +18,7 @@ protected:
     vec2i size;
     double rotation = 0;
 public:
+    int layer = 1;
     bool isQuad = false;
     int id;
     RGBAcolor color;
@@ -40,6 +41,7 @@ class player : public tile
 {
     void movement(float dt);
 public:
+    int layer = 3;
     void loop(float dt) override;
     void render();
 };

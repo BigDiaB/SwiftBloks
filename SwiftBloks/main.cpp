@@ -7,6 +7,7 @@
 #include "define.h"
 #include "engine.hpp"
 #include <iostream>
+
 ENGINE e(WINDOW_NAME,WINDOW_WIDTH,WINDOW_HEIGHT);
 
 
@@ -14,14 +15,23 @@ int main()
 {
 
 //#include "baseColors.h"
-    auto t = e.newPlayer(200, 200,e.newImage((char*)"assets/test.png"),e.calcQuad(32,1,1));
+   e.newPlayer(200, 200,e.newImage((char*)"assets/test.png"));
 //    auto g = e.newTile(200, 200, e.newImage((char*)"assets/test.png"));
-    e.setScale(8, 8);
+    e.setScale(2, 2);
     
-    while(e.isRunning())
+    for (int i = 0; i < 9; i++)
     {
-        float  dt = e.getDelta();
-        t.loop(dt);
+        for (int j = 0; j < 15; j++)
+        {
+            e.newTile((1+j) * 64, (1+i) * 64, e.newImage((char*)"assets/ground_grass_1.png"));
+        }
+    }
+    
+        while(e.isRunning())
+    {
+//        float  dt = e.getDelta();
+        e.debug();
+//        t.loop(dt);
         
     }
     return 0;

@@ -9,7 +9,8 @@
 #define define_h
 
 #define ENT_NUM 5
-#define TILE_NUM 5
+#define TILE_NUM 999
+#define NUM_LAYERS 5
 #define elseif else if
 #define WINDOW_NAME (char*)"SwiftBloks"
 #define WINDOW_WIDTH 1080

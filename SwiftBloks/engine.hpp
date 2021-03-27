@@ -16,6 +16,21 @@
 #include <SDL2/SDL_ttf.h>
 #include "objects.hpp"
 
+struct render_layers
+{
+    tile* tiles[TILE_NUM];
+};
+
+class renderer
+{
+public:
+    void renderMe(tile* t);
+    void destroyMe(tile* t);
+    void renderMe(player* t);
+    void destroyMe(player* t);
+    render_layers things[NUM_LAYERS];
+};
+
 class ENGINE
 {
     float SCALE_X = 1;
@@ -31,11 +46,11 @@ class ENGINE
     bool running = 1;
     int index = 0;
     int idblacklist[ENT_NUM + TILE_NUM];
-    tile* tiles[TILE_NUM];
     unsigned int last_tick_time = 0;
     float dt = 0;
     void tick();
 public:
+    class renderer Renderer;
     float getDelta();
     ENGINE(char* name, int w, int h);
     void loop();
@@ -60,19 +75,20 @@ public:
     int getID();
     vec4i calcQuad(int w, int h, int xid, int yid);
     vec4i calcQuad(int h, int xid, int yid);
-    tile newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame);
-    tile newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
-    tile newTile(float x, float y, int w, int h, SDL_Surface* pic);
-    tile newTile(float x, float y, SDL_Surface* pic);
     
-    player newPlayer(float x, float y, SDL_Surface* pic, vec4i quad_frame);
-    player newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
-    player newPlayer(float x, float y, int w, int h, SDL_Surface* pic);
-    player newPlayer(float x, float y, SDL_Surface* pic);
+    tile* newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame);
+    tile* newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
+    tile* newTile(float x, float y, int w, int h, SDL_Surface* pic);
+    tile* newTile(float x, float y, SDL_Surface* pic);
+    
+    player* newPlayer(float x, float y, SDL_Surface* pic, vec4i quad_frame);
+    player* newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h);
+    player* newPlayer(float x, float y, int w, int h, SDL_Surface* pic);
+    player* newPlayer(float x, float y, SDL_Surface* pic);
     
     
     
     RGBAcolor color;
-    void debug(tile t);
+    void debug();
 };
 #endif /* engine_hpp */
