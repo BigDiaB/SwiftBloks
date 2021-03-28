@@ -30,7 +30,8 @@ int main()
         while(e.isRunning())
     {
 //        float  dt = e.getDelta();
-        e.debug();
+        e.Renderer.render();
+        e.Looper.loop(e.getDelta());
 //        t.loop(dt);
         
     }

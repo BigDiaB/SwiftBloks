@@ -11,10 +11,14 @@
 
 void tile::loop(float dt)
 {
-    rotate(false, dt * 10);
-    e.draw(*this);
-
+    
 }
+
+void tile::render()
+{
+    e.draw(*this);
+}
+
 void tile::load(float x, float y, int w, int h, SDL_Surface* pic)
 {
     size.x = w;
@@ -67,7 +71,6 @@ double tile::getRotation()
 void player::loop(float dt)
 {
     movement(dt);
-    render();
     
     if (e.isDown(SDLK_r))
         rotate(false, dt * 200);
@@ -91,7 +94,7 @@ void player::movement(float dt)
 
 void player::render()
 {
-        e.draw(*this);
+    e.draw(*this);
 }
 
 vec2f player::getVel()

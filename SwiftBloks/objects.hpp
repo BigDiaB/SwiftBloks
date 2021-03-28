@@ -25,6 +25,7 @@ public:
     vec4i quad;
     
     virtual void loop(float dt);
+    virtual void render();
     void load(float x, float y, int w, int h, SDL_Surface* pic);
     void load(float x, float y, int w, int h, SDL_Surface* pic, vec4i quad_pos);
     void move(float nx, float ny);
@@ -45,6 +46,6 @@ public:
     vec2f getVel();
     int layer = 3;
     void loop(float dt) override;
-    void render();
+    void render() override;
 };
 #endif /* objects_hpp */

@@ -16,7 +16,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "objects.hpp"
 
-struct render_layers
+struct tile_layers
 {
     tile* tiles[TILE_NUM];
 };
@@ -28,7 +28,20 @@ public:
     void destroyMe(tile* t);
     void renderMe(player* t);
     void destroyMe(player* t);
-    render_layers things[NUM_LAYERS];
+    void render();
+    tile_layers things[NUM_LAYERS];
+};
+
+class looper
+{
+public:
+    void loopMe(tile* t);
+    void stopme(tile* t);
+    void loopMe(player* t);
+    void stopMe(player* t);
+    void loop(float dt);
+    tile* things[TILE_NUM];
+    
 };
 
 class ENGINE
@@ -51,6 +64,7 @@ class ENGINE
     void tick();
 public:
     class renderer Renderer;
+    class looper Looper;
     float getDelta();
     ENGINE(char* name, int w, int h);
     void loop();
@@ -91,4 +105,5 @@ public:
     RGBAcolor color;
     void debug();
 };
+
 #endif /* engine_hpp */

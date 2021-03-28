@@ -5,8 +5,8 @@
 //  Created by Benjamin Emde on 23.03.21.
 //
 
-#include "define.h"
-#include "engine.hpp"
+#include "define.h" // engine.hpp already included in define.h
+//#include "engine.hpp"
 #include <iostream>
 
 
@@ -234,6 +234,7 @@ tile* ENGINE::newTile(float x, float y, SDL_Surface* pic, vec4i quad_frame)
     t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 tile* ENGINE::newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
@@ -247,6 +248,7 @@ tile* ENGINE::newTile(float x, float y, SDL_Surface* pic, int xa, int ya, int w,
     t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 
@@ -256,6 +258,7 @@ tile* ENGINE::newTile(float x, float y, int w, int h, SDL_Surface* pic)
     t->load(x, y, w, h, pic);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 
@@ -267,6 +270,7 @@ tile* ENGINE::newTile(float x, float y, SDL_Surface* pic)
     t->load(x, y, w, h, pic);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 
@@ -276,6 +280,7 @@ player* ENGINE::newPlayer(float x, float y, SDL_Surface* pic, vec4i quad_frame)
     t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 player* ENGINE::newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, int w, int h)
@@ -289,6 +294,7 @@ player* ENGINE::newPlayer(float x, float y, SDL_Surface* pic, int xa, int ya, in
     t->load(x, y, quad_frame.w, quad_frame.h, pic, quad_frame);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 
@@ -298,6 +304,7 @@ player* ENGINE::newPlayer(float x, float y, int w, int h, SDL_Surface* pic)
     t->load(x, y, w, h, pic);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 
@@ -309,6 +316,7 @@ player* ENGINE::newPlayer(float x, float y, SDL_Surface* pic)
     t->load(x, y, w, h, pic);
     t->id = getID();
     Renderer.renderMe(t);
+    Looper.loopMe(t);
     return t;
 }
 
@@ -346,18 +354,6 @@ vec4i ENGINE::calcQuad(int h, int xid, int yid)
     quad.h = h;
     
     return quad;
-}
-
-void ENGINE::debug()
-{
-    for (int l = 0; l < NUM_LAYERS; l++)
-    {
-        for (int g = 0; g < TILE_NUM; g++)
-        {
-            if (Renderer.things[l].tiles[g] != NULL)
-                Renderer.things[l].tiles[g]->loop(dt);
-        }
-    }
 }
 
 void renderer::renderMe(tile* t)
@@ -399,5 +395,73 @@ void renderer::destroyMe(player* t)
     {
         if (t->id == things[t->layer].tiles[i]->id)
             things[t->layer].tiles[i] = NULL;
+    }
+}
+
+void renderer::render()
+{
+    for (int l = 0; l < NUM_LAYERS; l++)
+    {
+        for (int g = 0; g < TILE_NUM; g++)
+        {
+            if (things[l].tiles[g] != NULL)
+            {
+                things[l].tiles[g]->render();
+            }
+        }
+    }
+}
+
+
+void looper::loopMe(tile* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+    if (things[i] == NULL)
+    {
+        things[i] = t;
+        break;
+    }
+    }
+}
+
+void looper::stopme(tile* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+        if (t->id == things[i]->id)
+            things[i] = NULL;
+    }
+}
+
+void looper::loopMe(player* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+    if (things[i] == NULL)
+    {
+        things[i] = t;
+        break;
+    }
+    }
+}
+
+void looper::stopMe(player* t)
+{
+    for (int i = 0; i < TILE_NUM; i++)
+    {
+        if (t->id == things[i]->id)
+            things[i] = NULL;
+    }
+}
+
+void looper::loop(float dt)
+{
+    for (int l = 0; l < TILE_NUM; l++)
+    {
+        if (things[l] != NULL)
+        {
+            things[l]->loop(dt);
+        }
     }
 }
