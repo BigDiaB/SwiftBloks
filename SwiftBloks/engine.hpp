@@ -39,9 +39,24 @@ public:
     void stopme(tile* t);
     void loopMe(player* t);
     void stopMe(player* t);
-    void loop(float dt);
+    void loop();
     tile* things[TILE_NUM];
     
+};
+
+class texter
+{
+public:
+    TTF_Font* currentFont;
+    RGBAcolor currentColor;
+    void write(float x, float y, char* text);
+    void write(float x, float y, RGBAcolor bg, char* text, RGBAcolor dc);
+    void write(float x, float y, char* text, RGBAcolor dc);
+    void write(float x, float y, RGBAcolor bg, char* text);
+    void newFont(int size);
+    void newFont(char* path, int size);
+    void changeFont(TTF_Font* newFont);
+    void changeColor(int r, int g, int b, int a);
 };
 
 class ENGINE
@@ -63,6 +78,7 @@ class ENGINE
     float dt = 0;
     void tick();
 public:
+    class texter Text;
     class renderer Renderer;
     class looper Looper;
     float getDelta();

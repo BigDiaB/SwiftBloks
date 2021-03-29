@@ -50,4 +50,10 @@ struct vec4i
     int h = 1;
 };
 
+struct physics
+{
+    float friction = 300;
+    float weight = 0;
+};
+
 #endif /* util_h */

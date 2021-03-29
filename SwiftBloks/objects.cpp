@@ -11,7 +11,7 @@
 
 void tile::loop(float dt)
 {
-    
+    rotate(false, dt * 100);
 }
 
 void tile::render()
@@ -88,8 +88,8 @@ void player::movement(float dt)
 {
     pos.x += (vel.x * dt);
     pos.y += (vel.y * dt);
-    vel.x *= pow(0.002, dt);
-    vel.y *= pow(0.002, dt);
+    vel.x *= pow(0.002, dt + ((phi.friction / 10000) - phi.weight / 10000) - dt / 1.00001);
+    vel.y *= pow(0.002, dt + ((phi.friction / 10000) - phi.weight / 10000) - dt / 1.00001);
 }
 
 void player::render()

@@ -26,6 +26,7 @@ ENGINE::ENGINE(char* name, int w, int h)
 {
 #include "baseColors.h"
     
+    TTF_Init();
     DGcolor.white();
     WIDTH = w;
     HEIGHT = h;
@@ -71,6 +72,7 @@ bool ENGINE::isRunning()
     {
         SDL_DestroyWindow(window);
         SDL_DestroyRenderer(renderer);
+        TTF_Quit();
         SDL_Quit();
     }
     tick();
@@ -455,13 +457,102 @@ void looper::stopMe(player* t)
     }
 }
 
-void looper::loop(float dt)
+void looper::loop()
 {
     for (int l = 0; l < TILE_NUM; l++)
     {
         if (things[l] != NULL)
         {
-            things[l]->loop(dt);
+            things[l]->loop(e.getDelta());
         }
     }
+}
+
+void texter::newFont(int size)
+{
+    if (currentFont == NULL)
+        currentFont = TTF_OpenFont(DEFAULT_FONT, size);
+    else
+        std::cerr << "DEFAULT FONT ALREADY CREATED" << std::endl;
+}
+
+void texter::newFont(char* path, int size)
+{
+    if (currentFont == NULL)
+        currentFont = TTF_OpenFont(path, size);
+    else
+        std::cerr << "DEFAULT FONT ALREADY CREATED" << std::endl;
+}
+
+void texter::changeFont(TTF_Font *newFont)
+{
+    TTF_CloseFont(currentFont);
+    currentFont = newFont;
+}
+
+void texter::changeColor(int r, int g, int b, int a)
+{
+    currentColor.r = r;
+    currentColor.g = g;
+    currentColor.b = b;
+    currentColor.a = a;
+}
+
+
+void texter::write(float x, float y, char* text)
+{
+    SDL_Color c;
+    c.r = currentColor.r;
+    c.g = currentColor.g;
+    c.b = currentColor.b;
+    c.a = currentColor.a;
+    
+    e.draw(x, y, TTF_RenderText_Solid(currentFont, text, c));
+}
+void texter::write(float x, float y, RGBAcolor bg, char* text, RGBAcolor dc)
+{
+    SDL_Color c;
+    c.r = dc.r;
+    c.g = dc.g;
+    c.b = dc.b;
+    c.a = dc.a;
+    
+    SDL_Color g;
+    g.r = bg.r;
+    g.g = bg.g;
+    g.b = bg.g;
+    g.a = bg.a;
+    
+    e.draw(x, y, TTF_RenderText_Shaded(currentFont, text, c, g));
+}
+
+
+
+void texter::write(float x, float y, char* text, RGBAcolor dc)
+{
+    SDL_Color c;
+    c.r = dc.r;
+    c.g = dc.g;
+    c.b = dc.b;
+    c.a = dc.a;
+    
+    e.draw(x, y, TTF_RenderText_Solid(currentFont, text, c));
+}
+
+void texter::write(float x, float y, RGBAcolor bg, char* text)
+{
+    SDL_Color c;
+    c.r = currentColor.r;
+    c.g = currentColor.g;
+    c.b = currentColor.b;
+    c.a = currentColor.a;
+    
+    SDL_Color g;
+    g.r = bg.r;
+    g.g = bg.g;
+    g.b = bg.g;
+    g.a = bg.a;
+
+    
+    e.draw(x, y, TTF_RenderText_Shaded(currentFont, text, c, g));
 }

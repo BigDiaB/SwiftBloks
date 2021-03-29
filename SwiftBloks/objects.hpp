@@ -41,6 +41,7 @@ class player : public tile
 {
     void movement(float dt);
 public:
+    physics phi;
     vec2f vel;
     void move(float nx, float ny); 
     vec2f getVel();
