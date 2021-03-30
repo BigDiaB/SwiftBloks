@@ -88,8 +88,8 @@ void player::movement(float dt)
 {
     pos.x += (vel.x * dt);
     pos.y += (vel.y * dt);
-    vel.x *= pow(0.002, dt + ((phi.friction / 10000) - phi.weight / 10000) - dt / 1.00001);
-    vel.y *= pow(0.002, dt + ((phi.friction / 10000) - phi.weight / 10000) - dt / 1.00001);
+    vel.x *= pow(0.002 / (((phi.friction) / 1000) + 0.002), dt + phi.weight / 1000);
+    vel.y *= pow(0.002 / (((phi.friction) / 1000) + 0.002), dt + phi.weight / 1000);
 }
 
 void player::render()

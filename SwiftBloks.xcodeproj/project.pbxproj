@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F43143C261361BA001D3F96 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F43143B261361BA001D3F96 /* engine.cpp */; };
 		4F9DE2BE260CFF87007FCDD0 /* objects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE2BC260CFF87007FCDD0 /* objects.cpp */; };
 		4FB4527F2608FBA800758A2F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4527E2608FBA800758A2F /* main.cpp */; };
 		4FB452882608FBD600758A2F /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB452872608FBD600758A2F /* Metal.framework */; };
@@ -16,7 +17,6 @@
 		4FB452A52609CCDE00758A2F /* libSDL2_ttf-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4FB452A02609CCDE00758A2F /* libSDL2_ttf-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FB452A62609CCDE00758A2F /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB452A12609CCDE00758A2F /* libSDL2-2.0.0.dylib */; };
 		4FB452A72609CCDE00758A2F /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4FB452A12609CCDE00758A2F /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4FB452AE260A387C00758A2F /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FB452AC260A387C00758A2F /* engine.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +45,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F43143A261361BA001D3F96 /* engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = engine.hpp; sourceTree = "<group>"; };
+		4F43143B261361BA001D3F96 /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
 		4F9DE2BC260CFF87007FCDD0 /* objects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = objects.cpp; sourceTree = "<group>"; };
 		4F9DE2BD260CFF87007FCDD0 /* objects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = objects.hpp; sourceTree = "<group>"; };
 		4F9DE2BF260E0C3B007FCDD0 /* define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
@@ -58,8 +60,6 @@
 		4FB4529F2609CCDE00758A2F /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		4FB452A02609CCDE00758A2F /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		4FB452A12609CCDE00758A2F /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		4FB452AC260A387C00758A2F /* engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
-		4FB452AD260A387C00758A2F /* engine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine.hpp; sourceTree = "<group>"; };
 		4FB452B0260B753200758A2F /* ground_grass_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_grass_1.png; sourceTree = "<group>"; };
 		4FB452B1260B753200758A2F /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		4FB452B6260B75B300758A2F /* ground_grass_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_grass_1.png; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				4FB4527E2608FBA800758A2F /* main.cpp */,
-				4FB452AC260A387C00758A2F /* engine.cpp */,
-				4FB452AD260A387C00758A2F /* engine.hpp */,
+				4F43143B261361BA001D3F96 /* engine.cpp */,
+				4F43143A261361BA001D3F96 /* engine.hpp */,
 				4FB452BB260C9BFB00758A2F /* util.h */,
 				4FB452BC260CA23000758A2F /* baseColors.h */,
 				4F9DE2BC260CFF87007FCDD0 /* objects.cpp */,
@@ -220,8 +220,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB4527F2608FBA800758A2F /* main.cpp in Sources */,
+				4F43143C261361BA001D3F96 /* engine.cpp in Sources */,
 				4F9DE2BE260CFF87007FCDD0 /* objects.cpp in Sources */,
-				4FB452AE260A387C00758A2F /* engine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
