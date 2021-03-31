@@ -45,7 +45,7 @@ public:
     vec2f vel;
     void move(float nx, float ny); 
     vec2f getVel();
-    int layer = 3;
+    int layer = 1;
     void loop(float dt) override;
     void render() override;
 };

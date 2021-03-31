@@ -7,7 +7,7 @@
 
 #ifndef util_h
 #define util_h
-
+#include <SDL2/SDL.h>
 struct RGBAcolor
 {
     float r = 1;
@@ -52,7 +52,7 @@ struct vec4i
 
 struct physics
 {
-    float friction = 10;
+    float friction = 20;
     float weight = 20;
 };
 

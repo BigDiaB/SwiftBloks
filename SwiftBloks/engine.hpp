@@ -21,44 +21,6 @@ struct tile_layers
     tile* tiles[TILE_NUM];
 };
 
-class renderer
-{
-public:
-    void renderMe(tile* t);
-    void destroyMe(tile* t);
-    void renderMe(player* t);
-    void destroyMe(player* t);
-    void render();
-    tile_layers things[NUM_LAYERS];
-};
-
-class looper
-{
-public:
-    void loopMe(tile* t);
-    void stopme(tile* t);
-    void loopMe(player* t);
-    void stopMe(player* t);
-    void loop();
-    tile* things[TILE_NUM];
-    
-};
-
-class texter
-{
-public:
-    TTF_Font* currentFont;
-    RGBAcolor currentColor;
-    void write(float x, float y, char* text);
-    void write(float x, float y, RGBAcolor bg, char* text, RGBAcolor dc);
-    void write(float x, float y, char* text, RGBAcolor dc);
-    void write(float x, float y, RGBAcolor bg, char* text);
-    void newFont(int size);
-    void newFont(char* path, int size);
-    void changeFont(TTF_Font* newFont);
-    void changeColor(int r, int g, int b, int a);
-};
-
 class ENGINE
 {
     float SCALE_X = 1;
@@ -77,16 +39,38 @@ class ENGINE
     unsigned int last_tick_time = 0;
     float dt = 0;
     void tick();
+    void renderMe(tile* t);
+    void destroyMe(tile* t);
+    void renderMe(player* t);
+    void destroyMe(player* t);
+    void loopMe(tile* t);
+    void stopme(tile* t);
+    void loopMe(player* t);
+    void stopMe(player* t);
+    tile_layers render_space[NUM_LAYERS];
+    TTF_Font* currentFont;
+    RGBAcolor currentColor;
+    tile* loop_space[TILE_NUM];
 public:
-    class texter Text;
-    class renderer Renderer;
-    class looper Looper;
+    void render();
+    void loop();
     float getDelta();
     ENGINE(char* name, int w, int h);
-    void loop();
     bool isRunning();
     bool isDown(int key);
+    vec2i getWindowDimensions();
     SDL_Surface* newImage(char* path);
+    
+    void write(float x, float y, char* text);
+    void write(float x, float y, RGBAcolor bg, char* text, RGBAcolor dc);
+    void write(float x, float y, char* text, RGBAcolor dc);
+    void write(float x, float y, RGBAcolor bg, char* text);
+    
+    void newFont(int size);
+    void newFont(char* path, int size);
+    
+    void changeFont(TTF_Font* newFont);
+    void changeTextColor(int r, int g, int b, int a);
     
     void draw(float x, float y, SDL_Surface* surf);
     void draw(float x, float y, SDL_Surface* surf, float sx, float sy);

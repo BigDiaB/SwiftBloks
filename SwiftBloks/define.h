@@ -16,8 +16,6 @@
 #define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 720
 #define DEFAULT_FONT "assets/font.ttf"
-#include "engine.hpp"
-
-extern ENGINE e;
+#define MISSING_TEXTURE_PATH (char*)"assets/NOT_FOUND.png"
 
 #endif /* define_h */

@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F43143C261361BA001D3F96 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F43143B261361BA001D3F96 /* engine.cpp */; };
-		4F9DE2BE260CFF87007FCDD0 /* objects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE2BC260CFF87007FCDD0 /* objects.cpp */; };
+		4F9A934D2614EBA500D1F6D9 /* objects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A934C2614EBA500D1F6D9 /* objects.cpp */; };
 		4FB4527F2608FBA800758A2F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4527E2608FBA800758A2F /* main.cpp */; };
 		4FB452882608FBD600758A2F /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB452872608FBD600758A2F /* Metal.framework */; };
 		4FB452A22609CCDE00758A2F /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB4529F2609CCDE00758A2F /* libSDL2_image-2.0.0.dylib */; };
@@ -45,10 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4F43143A261361BA001D3F96 /* engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = engine.hpp; sourceTree = "<group>"; };
-		4F43143B261361BA001D3F96 /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
-		4F9DE2BC260CFF87007FCDD0 /* objects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = objects.cpp; sourceTree = "<group>"; };
-		4F9DE2BD260CFF87007FCDD0 /* objects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = objects.hpp; sourceTree = "<group>"; };
+		4F9A934C2614EBA500D1F6D9 /* objects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = objects.cpp; sourceTree = "<group>"; };
+		4F9A93502614EC4300D1F6D9 /* objects.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = objects.hpp; sourceTree = "<group>"; };
 		4F9DE2BF260E0C3B007FCDD0 /* define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		4FB4527B2608FBA800758A2F /* SwiftBloks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftBloks; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB4527E2608FBA800758A2F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -68,6 +65,8 @@
 		4FB452BA260B75BD00758A2F /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		4FB452BB260C9BFB00758A2F /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		4FB452BC260CA23000758A2F /* baseColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = baseColors.h; sourceTree = "<group>"; };
+		4FB8E7032614752B00C47AFF /* NOT_FOUND.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOT_FOUND.png; sourceTree = "<group>"; };
+		4FB8E7042614BBE100C47AFF /* namespace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = namespace.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,14 +105,13 @@
 		4FB4527D2608FBA800758A2F /* SwiftBloks */ = {
 			isa = PBXGroup;
 			children = (
-				4FB4527E2608FBA800758A2F /* main.cpp */,
-				4F43143B261361BA001D3F96 /* engine.cpp */,
-				4F43143A261361BA001D3F96 /* engine.hpp */,
-				4FB452BB260C9BFB00758A2F /* util.h */,
 				4FB452BC260CA23000758A2F /* baseColors.h */,
-				4F9DE2BC260CFF87007FCDD0 /* objects.cpp */,
-				4F9DE2BD260CFF87007FCDD0 /* objects.hpp */,
+				4FB4527E2608FBA800758A2F /* main.cpp */,
+				4FB452BB260C9BFB00758A2F /* util.h */,
 				4F9DE2BF260E0C3B007FCDD0 /* define.h */,
+				4FB8E7042614BBE100C47AFF /* namespace.h */,
+				4F9A93502614EC4300D1F6D9 /* objects.hpp */,
+				4F9A934C2614EBA500D1F6D9 /* objects.cpp */,
 			);
 			path = SwiftBloks;
 			sourceTree = "<group>";
@@ -158,6 +156,7 @@
 			children = (
 				4FB452B9260B75BD00758A2F /* ground_grass_1.png */,
 				4FB452BA260B75BD00758A2F /* test.png */,
+				4FB8E7032614752B00C47AFF /* NOT_FOUND.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -219,9 +218,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F9A934D2614EBA500D1F6D9 /* objects.cpp in Sources */,
 				4FB4527F2608FBA800758A2F /* main.cpp in Sources */,
-				4F43143C261361BA001D3F96 /* engine.cpp in Sources */,
-				4F9DE2BE260CFF87007FCDD0 /* objects.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

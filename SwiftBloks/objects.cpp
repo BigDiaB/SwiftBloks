@@ -7,6 +7,7 @@
 
 #include "objects.hpp"
 #include "define.h"
+//#include "namespace.h"
 #include <iostream>
 
 void tile::loop(float dt)
@@ -16,7 +17,7 @@ void tile::loop(float dt)
 
 void tile::render()
 {
-    e.draw(*this);
+//    test::draw(*this);
 }
 
 void tile::load(float x, float y, int w, int h, SDL_Surface* pic)
@@ -72,16 +73,16 @@ void player::loop(float dt)
 {
     movement(dt);
     
-    if (e.isDown(SDLK_r))
-        rotate(false, dt * 200);
-    if (e.isDown(SDLK_a) and not e.isDown(SDLK_d))
-        move(-100,0);
-    elseif (e.isDown(SDLK_d) and not e.isDown(SDLK_a))
-        move(100,0);
-    if (e.isDown(SDLK_w) and not e.isDown(SDLK_s))
-        move(0,-100);
-    elseif (e.isDown(SDLK_s) and not e.isDown(SDLK_w))
-        move(0,100);
+//    if (test::isDown(SDLK_r))
+//        rotate(false, dt * 200);
+//    if (test::isDown(SDLK_a) and not test::isDown(SDLK_d))
+//        move(-100,0);
+//    elseif (test::isDown(SDLK_d) and not test::isDown(SDLK_a))
+//        move(100,0);
+//    if (test::isDown(SDLK_w) and not test::isDown(SDLK_s))
+//        move(0,-100);
+//    elseif (test::isDown(SDLK_s) and not test::isDown(SDLK_w))
+//        move(0,100);
 }
 
 void player::movement(float dt)
@@ -94,7 +95,7 @@ void player::movement(float dt)
 
 void player::render()
 {
-    e.draw(*this);
+//    test::draw(*this);
 }
 
 vec2f player::getVel()
