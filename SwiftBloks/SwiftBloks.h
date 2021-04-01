@@ -34,8 +34,8 @@ struct Clock
 
 struct Window
 {
-    float SCALE_X = 1;
-    float SCALE_Y = 1;
+    float SCALE_X = 10;
+    float SCALE_Y = 10;
     int WIDTH;
     int HEIGHT;
     int keys[200];
@@ -51,7 +51,7 @@ struct Clock timer;
 struct Window window;
 bool running = 1;
 int index = 0;
-int idblacklist[ENT_NUM + TILE_NUM * NUM_LAYERS];
+int idblacklist[ID_NUM];
 TTF_Font* currentFont;
 RGBAcolor TXTCcolor;
 RGBAcolor DGcolor;
@@ -81,7 +81,7 @@ bool isDown(int key)
 int getID()
 {
 retry:
-    int id = random() % TILE_NUM;
+    int id = random() % ID_NUM;
     for (int i = 0; i < index; i++)
     {
         if (idblacklist[i] == id)
@@ -167,7 +167,7 @@ SDL_Surface* newImage(char* path)
     if (!surface)
     {
         std::cout << "WARNING: TEXTURE NOT FOUND\n";
-        return IMG_Load(MISSING_TEXTURE_PATH);
+        return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
     }
     return surface;
 }

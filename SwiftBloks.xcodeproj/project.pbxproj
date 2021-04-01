@@ -47,22 +47,14 @@
 		4FB4527B2608FBA800758A2F /* SwiftBloks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftBloks; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB4527E2608FBA800758A2F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4FB452872608FBD600758A2F /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
-		4FB452892608FBE700758A2F /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "SDL2/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		4FB452902608FD5C00758A2F /* libSDL_image-1.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL_image-1.2.0.dylib"; path = "SDL_image/lib/libSDL_image-1.2.0.dylib"; sourceTree = "<group>"; };
-		4FB452992609002400758A2F /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "SDL2_image/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
-		4FB4529C2609CB7400758A2F /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "SDL2_ttf/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		4FB4529F2609CCDE00758A2F /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		4FB452A02609CCDE00758A2F /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		4FB452A12609CCDE00758A2F /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		4FB452B0260B753200758A2F /* ground_grass_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_grass_1.png; sourceTree = "<group>"; };
-		4FB452B1260B753200758A2F /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
-		4FB452B6260B75B300758A2F /* ground_grass_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_grass_1.png; sourceTree = "<group>"; };
-		4FB452B7260B75B300758A2F /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
-		4FB452B9260B75BD00758A2F /* ground_grass_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground_grass_1.png; sourceTree = "<group>"; };
-		4FB452BA260B75BD00758A2F /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		4FB452BB260C9BFB00758A2F /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		4FB8E7032614752B00C47AFF /* NOT_FOUND.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOT_FOUND.png; sourceTree = "<group>"; };
 		4FB8E7042614BBE100C47AFF /* SwiftBloks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBloks.h; sourceTree = "<group>"; };
+		4FE907D126163D630041C543 /* loop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loop.h; sourceTree = "<group>"; };
+		4FE907D226164F160041C543 /* load.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = load.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +97,8 @@
 				4FB452BB260C9BFB00758A2F /* util.h */,
 				4F9DE2BF260E0C3B007FCDD0 /* define.h */,
 				4FB8E7042614BBE100C47AFF /* SwiftBloks.h */,
+				4FE907D126163D630041C543 /* loop.h */,
+				4FE907D226164F160041C543 /* load.h */,
 			);
 			path = SwiftBloks;
 			sourceTree = "<group>";
@@ -112,43 +106,17 @@
 		4FB452862608FBD600758A2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4FB452AF260B753200758A2F /* assets */,
-				4FB452B5260B75B300758A2F /* assets */,
-				4FB4529C2609CB7400758A2F /* libSDL2_ttf-2.0.0.dylib */,
-				4FB452992609002400758A2F /* libSDL2_image-2.0.0.dylib */,
 				4FB4529F2609CCDE00758A2F /* libSDL2_image-2.0.0.dylib */,
 				4FB452A02609CCDE00758A2F /* libSDL2_ttf-2.0.0.dylib */,
 				4FB452A12609CCDE00758A2F /* libSDL2-2.0.0.dylib */,
-				4FB452902608FD5C00758A2F /* libSDL_image-1.2.0.dylib */,
-				4FB452892608FBE700758A2F /* libSDL2-2.0.0.dylib */,
 				4FB452872608FBD600758A2F /* Metal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4FB452AF260B753200758A2F /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				4FB452B0260B753200758A2F /* ground_grass_1.png */,
-				4FB452B1260B753200758A2F /* test.png */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
-		4FB452B5260B75B300758A2F /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				4FB452B6260B75B300758A2F /* ground_grass_1.png */,
-				4FB452B7260B75B300758A2F /* test.png */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
 		4FB452B8260B75BD00758A2F /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				4FB452B9260B75BD00758A2F /* ground_grass_1.png */,
-				4FB452BA260B75BD00758A2F /* test.png */,
 				4FB8E7032614752B00C47AFF /* NOT_FOUND.png */,
 			);
 			path = assets;
