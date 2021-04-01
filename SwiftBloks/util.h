@@ -32,28 +32,18 @@ struct RGBAcolor
 
 struct vec2f
 {
-    float x = 1;
-    float y = 1;
+    float x,y;
 };
 
 struct vec2i
 {
-    int x = 1;
-    int y = 1;
+    int x,y;
 };
 
 struct vec4i
 {
-    int x = 1;
-    int y = 1;
-    int w = 1;
-    int h = 1;
-};
-
-struct physics
-{
-    float friction = 20;
-    float weight = 20;
+    int x,y,w,h;
+    bool defined = false;
 };
 
 #endif /* util_h */

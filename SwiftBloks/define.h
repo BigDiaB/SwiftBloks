@@ -17,5 +17,7 @@
 #define WINDOW_HEIGHT 720
 #define DEFAULT_FONT "assets/font.ttf"
 #define MISSING_TEXTURE_PATH (char*)"assets/NOT_FOUND.png"
+#define ENGINE_NAME SwiftBloks
+#define ENGINE_PATH "SwiftBloks.h"
 
 #endif /* define_h */
