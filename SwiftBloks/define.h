@@ -16,7 +16,7 @@
 #define ID_NUM 100
 #define DEFAULT_FONT "assets/font.ttf"
 #define MISSING_TEXTURE_PATH "assets/NOT_FOUND.png"
-#define MISSING_CUBE_TEXTURE_PATH "assets/NOT_FOUND_ISO_CUBE.png"
+#define MISSING_CUBE_TEXTURE_PATH (char*)"assets/NOT_FOUND_ISO_CUBE.png"
 #define ENGINE_NAME SwiftBloks
 #define LOOP_FILE "loop.h"
 #define LOAD_FILE "load.h"

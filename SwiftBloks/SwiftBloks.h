@@ -166,7 +166,7 @@ SDL_Surface* newImage(char* path)
     auto surface = IMG_Load(path);
     if (!surface)
     {
-        std::cout << "WARNING: TEXTURE NOT FOUND\n";
+        std::cout << "WARNING: TEXTURE NOT FOUND\n          Reverting to default texture.....\n";
         return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
     }
     return surface;

@@ -55,6 +55,7 @@
 		4FB8E7042614BBE100C47AFF /* SwiftBloks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBloks.h; sourceTree = "<group>"; };
 		4FE907D126163D630041C543 /* loop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loop.h; sourceTree = "<group>"; };
 		4FE907D226164F160041C543 /* load.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = load.h; sourceTree = "<group>"; };
+		4FE907D326165ECC0041C543 /* NOT_FOUND_ISO_CUBE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOT_FOUND_ISO_CUBE.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +118,7 @@
 		4FB452B8260B75BD00758A2F /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				4FE907D326165ECC0041C543 /* NOT_FOUND_ISO_CUBE.png */,
 				4FB8E7032614752B00C47AFF /* NOT_FOUND.png */,
 			);
 			path = assets;
