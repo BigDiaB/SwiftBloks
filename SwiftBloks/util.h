@@ -43,7 +43,6 @@ struct vec2i
 struct vec4i
 {
     int x,y,w,h;
-    bool defined = false;
 };
 
 #endif /* util_h */

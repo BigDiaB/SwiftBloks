@@ -43,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F6A3E90261A0F00003FF046 /* SwiftMods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftMods.h; sourceTree = "<group>"; };
 		4F9DE2BF260E0C3B007FCDD0 /* define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		4FB4527B2608FBA800758A2F /* SwiftBloks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftBloks; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB4527E2608FBA800758A2F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 				4FB8E7042614BBE100C47AFF /* SwiftBloks.h */,
 				4FE907D126163D630041C543 /* loop.h */,
 				4FE907D226164F160041C543 /* load.h */,
+				4F6A3E90261A0F00003FF046 /* SwiftMods.h */,
 			);
 			path = SwiftBloks;
 			sourceTree = "<group>";

@@ -12,15 +12,7 @@ using namespace ENGINE_NAME;
 
 int main()
 {
-    auto test_img = newImage(MISSING_CUBE_TEXTURE_PATH);
-    RGBAcolor* blue = new RGBAcolor;
-    blue->black();
-    blue->setB(120);
-    setScale(5, 5);
     start(WINDOW_NAME, WINDOW_WIDTH, WINDOW_HEIGHT);
-    while(isRunning())
-    {
-        #include LOOP_FILE
-    }
+    #include LOOP_FILE
     return 0;
 }

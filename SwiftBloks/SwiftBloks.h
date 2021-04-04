@@ -65,6 +65,8 @@ RGBAcolor tempcolor;
 void start(char* name, int w, int h)
 {
     TTF_Init();
+    currentFont = TTF_OpenFont(DEFAULT_FONT, 16);
+    TXTCcolor.white();
     DGcolor.white();
     window.WIDTH = w;
     window.HEIGHT = h;
@@ -226,19 +228,31 @@ void draw(float x, float y, SDL_Surface* surf, vec4i t_quad, float rot, float sx
     body.y = y;
     
     
-    if (t_quad.defined)
-    {
+    
     SDL_Rect quad;
     quad.x = t_quad.x;
     quad.y = t_quad.y;
     quad.w = t_quad.w;
     quad.h = t_quad.h;
     SDL_RenderCopyEx(window.renderer, tex, &quad, &body, rot, nullptr, SDL_FLIP_NONE);
-    }
-    else
-    {
-        SDL_RenderCopyEx(window.renderer, tex, nullptr, &body, rot, nullptr, SDL_FLIP_NONE);
-    }
+    
+    SDL_DestroyTexture(tex);
+}
+
+void draw(float x, float y, SDL_Surface* surf, float rot, float sx, float sy)
+{
+    
+    auto tex = SDL_CreateTextureFromSurface(window.renderer, surf);
+    
+    SDL_Rect body;
+    body.w = surf->w * sx;
+    body.h = surf->h * sy;
+    body.x = x;
+    body.y = y;
+    
+    
+    SDL_RenderCopyEx(window.renderer, tex, nullptr, &body, rot, nullptr, SDL_FLIP_NONE);
+    
     SDL_DestroyTexture(tex);
 }
 
@@ -364,8 +378,10 @@ void write(float x, float y, char* text)
     c.b = TXTCcolor.b;
     c.a = TXTCcolor.a;
     
-    draw(x, y, TTF_RenderText_Solid(currentFont, text, c));
+    if (currentFont != NULL)
+        draw(x, y, TTF_RenderText_Solid(currentFont, text, c));
 }
+
 void write(float x, float y, RGBAcolor bg, char* text, RGBAcolor dc)
 {
     SDL_Color c;
@@ -416,3 +432,5 @@ void write(float x, float y, RGBAcolor bg, char* text)
 
 
 }
+
+#include "SwiftMods.h"

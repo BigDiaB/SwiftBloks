@@ -18,8 +18,12 @@
 #define MISSING_TEXTURE_PATH "assets/NOT_FOUND.png"
 #define MISSING_CUBE_TEXTURE_PATH (char*)"assets/NOT_FOUND_ISO_CUBE.png"
 #define ENGINE_NAME SwiftBloks
+#define ENGINE_NAME_STRING (char*)"SwiftBloks"
 #define LOOP_FILE "loop.h"
 #define LOAD_FILE "load.h"
 #define ENGINE_PATH "SwiftBloks.h"
+
+
+#define COLLISION_RESPONSE_FACTOR 0.7
 
 #endif /* define_h */
