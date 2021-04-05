@@ -11,7 +11,6 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
-#include "define.h"
 #include "util.h"
 
 
@@ -94,6 +93,21 @@ retry:
     return id;
 }
 
+SDL_Surface* newImage(char* path)
+{
+    auto surface = IMG_Load(path);
+    if (!surface)
+    {
+        std::cout << "WARNING: TEXTURE NOT FOUND\n          Reverting to default texture.....\n";
+        return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
+    }
+    return surface;
+}
+
+SDL_Surface* getSTDIMG()
+{
+    return newImage(MISSING_CUBE_TEXTURE_PATH);
+}
 vec4i calcQuad(int w, int h, int xid, int yid)
 {
     vec4i quad;
@@ -161,17 +175,6 @@ vec2i getWindowDimensions()
 {
     vec2i temp = { window.WIDTH, window.HEIGHT };
     return temp;
-}
-
-SDL_Surface* newImage(char* path)
-{
-    auto surface = IMG_Load(path);
-    if (!surface)
-    {
-        std::cout << "WARNING: TEXTURE NOT FOUND\n          Reverting to default texture.....\n";
-        return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
-    }
-    return surface;
 }
 
 void draw(float x, float y, SDL_Surface* surf)
@@ -432,5 +435,3 @@ void write(float x, float y, RGBAcolor bg, char* text)
 
 
 }
-
-#include "SwiftMods.h"
