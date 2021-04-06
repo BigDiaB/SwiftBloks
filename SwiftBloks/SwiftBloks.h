@@ -10,6 +10,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <string>
+#include <sstream>
+#include <fstream>
 #include <iostream>
 #include "util.h"
 
@@ -79,35 +82,16 @@ bool isDown(int key)
     return window.keys[key];
 }
 
-int getID()
+char* int2charptr(float num)
 {
-retry:
-    int id = random() % ID_NUM;
-    for (int i = 0; i < index; i++)
-    {
-        if (idblacklist[i] == id)
-            goto retry;
-    }
-    idblacklist[index] = id;
-    index++;
-    return id;
+    std::stringstream strs;
+      strs << num;
+      std::string temp_str = strs.str();
+      char* char_type = (char*) temp_str.c_str();
+    return char_type;
 }
 
-SDL_Surface* newImage(char* path)
-{
-    auto surface = IMG_Load(path);
-    if (!surface)
-    {
-        std::cout << "WARNING: TEXTURE NOT FOUND\n          Reverting to default texture.....\n";
-        return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
-    }
-    return surface;
-}
 
-SDL_Surface* getSTDIMG()
-{
-    return newImage(MISSING_CUBE_TEXTURE_PATH);
-}
 vec4i calcQuad(int w, int h, int xid, int yid)
 {
     vec4i quad;
@@ -177,8 +161,21 @@ vec2i getWindowDimensions()
     return temp;
 }
 
+SDL_Surface* newImage(char* path)
+{
+    auto surface = IMG_Load(path);
+    if (!surface)
+    {
+        std::cout << "WARNING: TEXTURE NOT FOUND\n          Reverting to default texture.....\n";
+        return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
+    }
+    return surface;
+}
+
 void draw(float x, float y, SDL_Surface* surf)
 {
+    if (surf != NULL)
+    {
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
@@ -186,7 +183,7 @@ void draw(float x, float y, SDL_Surface* surf)
     rect.h = surf->h * window.SCALE_Y;
     auto tex = SDL_CreateTextureFromSurface(window.renderer, surf);
     SDL_RenderCopy(window.renderer, tex, nullptr, &rect);
-    SDL_DestroyTexture(tex);
+    SDL_DestroyTexture(tex);}
 }
 
 void draw(float x, float y, SDL_Surface* surf, float sx, float sy)
@@ -433,5 +430,20 @@ void write(float x, float y, RGBAcolor bg, char* text)
     draw(x, y, TTF_RenderText_Shaded(currentFont, text, c, g));
 }
 
+void write(float x, float y, float num)
+{
+    SDL_Color c;
+    c.r = TXTCcolor.r;
+    c.g = TXTCcolor.g;
+    c.b = TXTCcolor.b;
+    c.a = TXTCcolor.a;
+    
+    
+    
+    
+    
+    if (currentFont != NULL)
+        draw(x, y, TTF_RenderText_Solid(currentFont, int2charptr(num), c));
+}
 
 }

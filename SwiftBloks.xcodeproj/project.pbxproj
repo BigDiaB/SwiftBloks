@@ -44,9 +44,6 @@
 
 /* Begin PBXFileReference section */
 		4F6A3E90261A0F00003FF046 /* SwiftMods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftMods.h; sourceTree = "<group>"; };
-		4F6A3E91261B1687003FF046 /* ISO_MOD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISO_MOD.h; sourceTree = "<group>"; };
-		4F6A3E93261B5404003FF046 /* THINGS_MOD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THINGS_MOD.h; sourceTree = "<group>"; };
-		4F6A3E94261B803A003FF046 /* COLL_MOD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = COLL_MOD.h; sourceTree = "<group>"; };
 		4FB4527B2608FBA800758A2F /* SwiftBloks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftBloks; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB4527E2608FBA800758A2F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4FB452872608FBD600758A2F /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -56,9 +53,12 @@
 		4FB452BB260C9BFB00758A2F /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		4FB8E7032614752B00C47AFF /* NOT_FOUND.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOT_FOUND.png; sourceTree = "<group>"; };
 		4FB8E7042614BBE100C47AFF /* SwiftBloks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBloks.h; sourceTree = "<group>"; };
+		4FC53666261C51290098EB30 /* Collisions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Collisions.h; sourceTree = "<group>"; };
+		4FC53668261C52A70098EB30 /* Base_body.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base_body.h; sourceTree = "<group>"; };
 		4FE907D126163D630041C543 /* loop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loop.h; sourceTree = "<group>"; };
 		4FE907D226164F160041C543 /* load.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = load.h; sourceTree = "<group>"; };
 		4FE907D326165ECC0041C543 /* NOT_FOUND_ISO_CUBE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOT_FOUND_ISO_CUBE.png; sourceTree = "<group>"; };
+		4FEBAA8B261C551D00FF6EF2 /* Iso_Cubes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iso_Cubes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,16 +76,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F6A3E92261B5335003FF046 /* MODS */ = {
-			isa = PBXGroup;
-			children = (
-				4F6A3E91261B1687003FF046 /* ISO_MOD.h */,
-				4F6A3E93261B5404003FF046 /* THINGS_MOD.h */,
-				4F6A3E94261B803A003FF046 /* COLL_MOD.h */,
-			);
-			path = MODS;
-			sourceTree = "<group>";
-		};
 		4FB452722608FBA800758A2F = {
 			isa = PBXGroup;
 			children = (
@@ -107,13 +97,13 @@
 		4FB4527D2608FBA800758A2F /* SwiftBloks */ = {
 			isa = PBXGroup;
 			children = (
-				4F6A3E92261B5335003FF046 /* MODS */,
-				4FE907D126163D630041C543 /* loop.h */,
-				4FE907D226164F160041C543 /* load.h */,
-				4FB452BB260C9BFB00758A2F /* util.h */,
+				4FC53667261C51BC0098EB30 /* mods */,
+				4FB4527E2608FBA800758A2F /* main.cpp */,
 				4F6A3E90261A0F00003FF046 /* SwiftMods.h */,
 				4FB8E7042614BBE100C47AFF /* SwiftBloks.h */,
-				4FB4527E2608FBA800758A2F /* main.cpp */,
+				4FB452BB260C9BFB00758A2F /* util.h */,
+				4FE907D126163D630041C543 /* loop.h */,
+				4FE907D226164F160041C543 /* load.h */,
 			);
 			path = SwiftBloks;
 			sourceTree = "<group>";
@@ -136,6 +126,16 @@
 				4FB8E7032614752B00C47AFF /* NOT_FOUND.png */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		4FC53667261C51BC0098EB30 /* mods */ = {
+			isa = PBXGroup;
+			children = (
+				4FC53666261C51290098EB30 /* Collisions.h */,
+				4FC53668261C52A70098EB30 /* Base_body.h */,
+				4FEBAA8B261C551D00FF6EF2 /* Iso_Cubes.h */,
+			);
+			path = mods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

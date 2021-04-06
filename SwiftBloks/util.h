@@ -5,8 +5,9 @@
 //  Created by Benjamin Emde on 25.03.21.
 //
 
-#pragma once
-
+#ifndef util_h
+#define util_h
+#include <SDL2/SDL.h>
 struct RGBAcolor
 {
     float r = 1;
@@ -49,12 +50,9 @@ struct vec3i
     int x,y,z;
 };
 
-struct vec4f
-{
-    float x,y,w,h;
-};
-
 struct vec4i
 {
     int x,y,w,h;
 };
+
+#endif /* util_h */

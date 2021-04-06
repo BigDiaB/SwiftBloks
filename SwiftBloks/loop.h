@@ -5,20 +5,24 @@
 //  Created by Benjamin Emde on 01.04.21.
 //
 
+
+
 #pragma once
 
 RGBAcolor* blue = new RGBAcolor;
 blue->black();
 blue->setB(120);
-setScale(2, 2);
-ISO::setOffset(450, 175);
-
+setScale(5, 5);
+auto img = newImage(MISSING_CUBE_TEXTURE_PATH);
+setIMGRGB(img, *blue);
 setBGcolor(*blue);
-cube c;
+ISO::setOffset(400,275);
+
+
 while(isRunning())
 {
-    float dt = timer.getDelta();
-    c.movement(dt);
-    ISO::drawCube(c.getPos().x, c.getPos().y, c.getPos().z);
-//    write(250, 100,ENGINE_NAME_STRING);
+    
+    
+    write(250, 100,ENGINE_NAME_STRING);
 }
+
