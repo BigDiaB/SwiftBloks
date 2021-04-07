@@ -41,11 +41,10 @@ void drawCubeCollider(float x, float y, float z)
     rect(false,OFFSET.x  + x * CUBE_HALF_SURFACE_HEIGHT - y * CUBE_HALF_SURFACE_HEIGHT, OFFSET.y + x * CUBE_HALF_SURFACE_WIDTH + y * CUBE_HALF_SURFACE_WIDTH - z * Z_AXIS_VALUE, 20,26);
 }
 
-
-class cube: public body
+class CUBE: public body
 {
 public:
-    void movement(float dt)
+    void update(float dt) override
     {
         pos.x += (vel.x * dt) * speed;
         pos.y += (vel.y * dt) * speed;
@@ -69,46 +68,113 @@ public:
         }
     }
     
-    void collide(body cubes[], int cube_index)
+//    void collide(CHUNK chunk, int cube_index)
+//    {
+//        for (int i = 0; i < chunk.getSize().x; i++)
+//        {
+//            if (COLL::AABB(getPos().x,getPos().y,1,1,getPos().z, chunk.bloks[i].getPos().x,chunk.bloks[i].getPos().y,1,1,chunk.bloks[i].getPos().z))
+//            {
+//                drawCubeCollider(chunk.bloks[i].getPos().x, chunk.bloks[i].getPos().y, chunk.bloks[i].getPos().z);
+//                vec2i dir = COLL::getDirection(pos, 0.4, 0.4, chunk.bloks[i].getPos());
+//
+//                if (dir.x < 0 and vel.x < 0)
+//                {
+//                    vel.x *= -COLLISION_RESPONSE_FACTOR;
+//                }
+//                elseif (dir.x > 0 and vel.x > 0)
+//                {
+//                    vel.x *= -COLLISION_RESPONSE_FACTOR;
+//                }
+//
+//                if (dir.y < 0 and vel.y < 0)
+//                {
+//                    vel.y *= -COLLISION_RESPONSE_FACTOR;
+//                }
+//                elseif (dir.y > 0 and vel.y > 0)
+//                {
+//                    vel.y *= -COLLISION_RESPONSE_FACTOR;
+//                }
+//
+//            }
+//        }
+//    }
+    
+    void draw() override
     {
-        for (int i = 0; i < CHUNK_SIZE; i++)
+        drawCube(pos.x, pos.y, pos.z);
+    }
+};
+
+class CHUNK
+{
+public:
+    vec3i pos;
+    int fill = 0;
+    int sorted = 0;
+    int size = 10 * 10 * 5;
+    int dimensions[3] = {10,10,5};
+    CUBE bloks[10 * 10 * 5];
+    CUBE bloks_sorted[10 * 10 * 5];
+    
+    void add(int x, int y, int z)
+    {
+        CUBE temp;
+        temp.setPos(x, y, z);
+        bloks[fill] = temp;
+        fill++;
+    }
+    
+    void sort()
+    {
+        for (int z = 0; z < dimensions[2]; z++)
         {
-            for (int j = 0; i < CHUNK_SIZE; j++)
-            if (COLL::AABB(getPos().x,getPos().y,1,1,getPos().z, cubes[i].getPos().x,cubes[i].getPos().y,1,1,cubes[i].getPos().z))
+            for (int y = 0; y < dimensions[1]; y++)
             {
-                drawCubeCollider(cubes[i].getPos().x, cubes[i].getPos().y, cubes[i].getPos().z);
-                vec2i dir = COLL::getDirection(pos, 0.4, 0.4, cubes[i].getPos());
-                
-                if (dir.x < 0 and vel.x < 0)
+                for (int x = 0; x < dimensions[0]; x++)
                 {
-                    vel.x *= -COLLISION_RESPONSE_FACTOR;
+                    for (int i = 0; i < size; i++)
+                    {
+                        if (&bloks[i] != NULL)
+                        {
+                            if (bloks[i].getPos().x == x and bloks[i].getPos().y == y and bloks[i].getPos().z == z)
+                            {
+                                bloks_sorted[sorted] = bloks[i];
+                                sorted++;
+                            }
+                        }
+                    }
                 }
-                elseif (dir.x > 0 and vel.x > 0)
-                {
-                    vel.x *= -COLLISION_RESPONSE_FACTOR;
-                }
-                
-                if (dir.y < 0 and vel.y < 0)
-                {
-                    vel.y *= -COLLISION_RESPONSE_FACTOR;
-                }
-                elseif (dir.y > 0 and vel.y > 0)
-                {
-                    vel.y *= -COLLISION_RESPONSE_FACTOR;
-                }
-                
             }
         }
     }
     
+    void ground()
+    {
+        for (int y = 0; y < dimensions[1]; y++)
+        {
+            for (int x = 0; x < dimensions[0]; x++)
+            {
+                add(x, y, 0);
+            }
+        }
+    }
+    
+    void draw()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (&bloks_sorted[i] != NULL)
+            {
+                drawCube(bloks_sorted[i].getPos().x + pos.x * dimensions[0], bloks_sorted[i].getPos().y + pos.y * dimensions[1], bloks_sorted[i].getPos().z + pos.z * dimensions[2]);
+            }
+        }
+    }
 };
 
 
-class ISO_CHUNK
-{
-    int size = 10 * 10 * 5;
-    body bloks[10 * 10 * 5];
-};
+
+
+
 
 };
 

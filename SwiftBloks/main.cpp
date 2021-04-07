@@ -24,6 +24,7 @@
 
 #include ENGINE_PATH
 using namespace ENGINE_NAME;
+auto img = newImage(MISSING_CUBE_TEXTURE_PATH);
 #include ENGINE_MOD_PATH
 #include LOAD_FILE
 
@@ -31,5 +32,4 @@ int main()
 {
     start(WINDOW_NAME, WINDOW_WIDTH, WINDOW_HEIGHT);
     #include LOOP_FILE
-    return 0;
 }

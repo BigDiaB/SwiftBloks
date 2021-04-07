@@ -32,6 +32,10 @@ struct Clock
         dt = (tick_time - last_tick_time) * 0.001;
         last_tick_time = tick_time;
     }
+    void wait(int time_in_seconds)
+    {
+        SDL_Delay(time_in_seconds * 1000);
+    }
 };
 
 struct Window
@@ -49,6 +53,7 @@ struct Window
 
 
 namespace ENGINE_NAME {
+int how_it_ran = 0;
 struct Clock timer;
 struct Window window;
 bool running = 1;
@@ -62,7 +67,6 @@ RGBAcolor BGcolor;
 
 
 RGBAcolor tempcolor;
-
 
 void start(char* name, int w, int h)
 {

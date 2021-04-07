@@ -12,9 +12,10 @@ class body
 protected:
     vec2f vel;
     float speed = 1;
-    vec3f pos = {0,0,0};
-    vec2f size;
+    vec3f pos;
+    vec2f size = {1,1};
 public:
+    SDL_Texture* img;
     void setPos(float x, float y, float z)
     {
         pos.x = x;
@@ -45,5 +46,9 @@ public:
         pos.y += (vel.y * dt) * speed;
         vel.x *= pow(0.002, dt);
         vel.y *= pow(0.002, dt);
+    }
+    virtual void draw()
+    {
+        rect(false, pos.x, pos.y, size.x, size.y);
     }
 };

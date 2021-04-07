@@ -27,12 +27,12 @@ namespace COLL
         
         if (pos1.x + w1 <= pos2.x)
             result.x = 1;
-        if (pos1.x + w1 >= pos2.x)
+        elseif (pos1.x + w1 >= pos2.x)
             result.x = -1;
         
         if (pos1.y + h1 <= pos2.y)
             result.y = 1;
-        if (pos1.y + h1 >= pos2.y)
+        elseif (pos1.y + h1 >= pos2.y)
             result.y = -1;
         return result;
     }

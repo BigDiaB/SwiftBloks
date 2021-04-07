@@ -5,24 +5,38 @@
 //  Created by Benjamin Emde on 01.04.21.
 //
 
+setScale(2, 2);
 
 
-#pragma once
+if (!load())
+{
+    running = false;
+    return 2;
+}
 
-RGBAcolor* blue = new RGBAcolor;
-blue->black();
-blue->setB(120);
-setScale(5, 5);
-auto img = newImage(MISSING_CUBE_TEXTURE_PATH);
-setIMGRGB(img, *blue);
-setBGcolor(*blue);
-ISO::setOffset(400,275);
 
+c.ground();
+d.ground();
+e.ground();
+f.ground();
+c.sort();
+d.sort();
+e.sort();
+f.sort();
+
+p.setPos(1,1,1);
 
 while(isRunning())
 {
-    
+    float dt = update();
+    c.draw();
+    d.draw();
+    e.draw();
+    f.draw();
+    p.draw();
+    p.update(dt);
     
     write(250, 100,ENGINE_NAME_STRING);
 }
 
+return 1;
