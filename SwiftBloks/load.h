@@ -9,7 +9,7 @@ int load()
 {
     ISO::setOffset(575,100);
     
-    return 1;
+    return 0;
 }
 
 float update()
@@ -23,3 +23,5 @@ ISO::CHUNK d{0,1,0};
 ISO::CHUNK e{1,0,0};
 ISO::CHUNK f{1,1,0};
 ISO::CUBE  p;
+
+

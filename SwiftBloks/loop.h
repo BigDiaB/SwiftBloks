@@ -8,7 +8,7 @@
 setScale(2, 2);
 
 
-if (!load())
+if (load())
 {
     running = false;
     return 2;
@@ -25,10 +25,15 @@ e.sort();
 f.sort();
 
 p.setPos(1,1,1);
+p.img.set(MISSING_CUBE_TEXTURE_PATH);
 
 while(isRunning())
 {
     float dt = update();
+//    c.drawCollider();
+//    d.drawCollider();
+//    e.drawCollider();
+//    f.drawCollider();
     c.draw();
     d.draw();
     e.draw();
@@ -37,6 +42,11 @@ while(isRunning())
     p.update(dt);
     
     write(250, 100,ENGINE_NAME_STRING);
+    
+    if (isDown(keyboard::Escape))
+    {
+        running = false;
+    }
 }
 
 return 1;

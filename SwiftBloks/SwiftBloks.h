@@ -6,21 +6,21 @@
 //
 
 #pragma once
-
+#include <chrono>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
 #include <sstream>
-#include <fstream>
 #include <iostream>
+#include "table.h"
 #include "util.h"
 
 
 struct Clock
 {
     float dt = 0;
-    unsigned int last_tick_time = 0;
+    std::chrono::steady_clock::time_point lastUpdate;
     float getDelta()
     {
         return dt;
@@ -28,9 +28,9 @@ struct Clock
     
     void tick()
     {
-        unsigned int tick_time = SDL_GetTicks();
-        dt = (tick_time - last_tick_time) * 0.001;
-        last_tick_time = tick_time;
+        auto now = std::chrono::steady_clock::now();
+        dt = std::chrono::duration_cast<std::chrono::microseconds>(now - lastUpdate).count() / 100000.0f;
+        lastUpdate = now;
     }
     void wait(int time_in_seconds)
     {
@@ -53,7 +53,6 @@ struct Window
 
 
 namespace ENGINE_NAME {
-int how_it_ran = 0;
 struct Clock timer;
 struct Window window;
 bool running = 1;
@@ -63,10 +62,59 @@ TTF_Font* currentFont;
 RGBAcolor TXTCcolor;
 RGBAcolor DGcolor;
 RGBAcolor BGcolor;
+struct image
+{
+    SDL_Texture* src;
+    vec2i size;
+    void set(char* path)
+    {
+        auto temp = IMG_Load(path);
+        size.x = temp->w;
+        size.y = temp->h;
+        src = SDL_CreateTextureFromSurface(window.renderer, temp);
+        SDL_FreeSurface(temp);
+    }
+    void set(SDL_Surface* surf)
+    {
+        size.x = surf->w;
+        size.y = surf->h;
+        src = SDL_CreateTextureFromSurface(window.renderer, surf);
+    }
+    void setRGB(int r, int g, int b)
+    {
+        SDL_SetTextureColorMod(src, r, g, b);
+    }
+    void setAlpha(int alpha)
+    {
+        SDL_SetTextureAlphaMod(src,alpha);
+    }
+
+};
+
+table<image*>images;
 
 
 
 RGBAcolor tempcolor;
+
+SDL_Surface* newImage(char* path)
+{
+    auto surface = IMG_Load(path);
+    if (!surface)
+    {
+        std::cout << "WARNING: TEXTURE NOT FOUND\nReverting to default texture.....\n";
+        image* img = new image;
+        img->set(MISSING_CUBE_TEXTURE_PATH);
+        images.add(img);
+        
+        return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
+    }
+    image* img = new image;
+    img->set(path);
+    images.add(img);
+    return surface;
+}
+
 
 void start(char* name, int w, int h)
 {
@@ -145,12 +193,11 @@ bool isRunning()
     SDL_RenderClear(window.renderer);
     SDL_SetRenderDrawColor(window.renderer, DGcolor.r, DGcolor.g, DGcolor.b, DGcolor.a);
     
-    if (isDown(SDLK_ESCAPE))
-        running = false;
     if (!running)
     {
         SDL_DestroyWindow(window.window);
         SDL_DestroyRenderer(window.renderer);
+        TTF_CloseFont(currentFont);
         TTF_Quit();
         SDL_Quit();
     }
@@ -163,17 +210,6 @@ vec2i getWindowDimensions()
 {
     vec2i temp = { window.WIDTH, window.HEIGHT };
     return temp;
-}
-
-SDL_Surface* newImage(char* path)
-{
-    auto surface = IMG_Load(path);
-    if (!surface)
-    {
-        std::cout << "WARNING: TEXTURE NOT FOUND\n          Reverting to default texture.....\n";
-        return IMG_Load(MISSING_CUBE_TEXTURE_PATH);
-    }
-    return surface;
 }
 
 void draw(float x, float y, SDL_Surface* surf)
@@ -279,6 +315,92 @@ void draw(float x, float y, SDL_Surface* surf, int xa, int ya, int w, int h, flo
     auto tex = SDL_CreateTextureFromSurface(window.renderer, surf);
     SDL_RenderCopy(window.renderer, tex, &quad, &body);
     SDL_DestroyTexture(tex);
+}
+
+void draw(float x, float y, image* img)
+{
+    if (img != NULL)
+    {
+    SDL_Rect rect;
+    rect.x = x;
+    rect.y = y;
+    rect.w = img->size.x * window.SCALE_X;
+    rect.h = img->size.y * window.SCALE_Y;
+    SDL_RenderCopy(window.renderer, img->src, nullptr, &rect);
+    }
+}
+
+void draw(float x, float y, image* img, float sx, float sy)
+{
+    SDL_Rect rect;
+    rect.x = x;
+    rect.y = y;
+    rect.w = img->size.x * sx;
+    rect.h = img->size.y * sy;
+    SDL_RenderCopy(window.renderer, img->src, nullptr, &rect);
+}
+
+void draw(float x, float y, image* img, vec4i t_quad)
+{
+    SDL_Rect body;
+    body.w = img->size.x * window.SCALE_X;
+    body.h = img->size.y * window.SCALE_Y;
+    body.x = x;
+    body.y = y;
+    
+    SDL_Rect quad;
+    quad.x = t_quad.x;
+    quad.y = t_quad.y;
+    quad.w = t_quad.w;
+    quad.h = t_quad.h;
+    SDL_RenderCopyEx(window.renderer, img->src, &quad, &body, NULL, nullptr, SDL_FLIP_NONE);
+}
+
+void draw(float x, float y, image* img, vec4i t_quad, float rot, float sx, float sy)
+{
+    SDL_Rect body;
+    body.w = img->size.x * sx;
+    body.h = img->size.y * sy;
+    body.x = x;
+    body.y = y;
+    
+    SDL_Rect quad;
+    quad.x = t_quad.x;
+    quad.y = t_quad.y;
+    quad.w = t_quad.w;
+    quad.h = t_quad.h;
+    SDL_RenderCopyEx(window.renderer, img->src, &quad, &body, rot, nullptr, SDL_FLIP_NONE);
+}
+
+void draw(float x, float y, image* img, float rot, float sx, float sy)
+{
+    SDL_Rect body;
+    body.w = img->size.x * sx;
+    body.h = img->size.y* sy;
+    body.x = x;
+    body.y = y;
+    
+    
+    SDL_RenderCopyEx(window.renderer, img->src, nullptr, &body, rot, nullptr, SDL_FLIP_NONE);
+}
+
+
+void draw(float x, float y, image* img, int xa, int ya, int w, int h, float sx, float sy)
+{
+    SDL_Rect quad;
+    SDL_Rect body;
+    
+    quad.x = xa;
+    quad.y = ya;
+    quad.w = w;
+    quad.h = h;
+    
+    body.x = x;
+    body.y = y;
+    body.w = w * sx;
+    body.h = h * sy;
+    
+    SDL_RenderCopy(window.renderer, img->src, &quad, &body);
 }
 
 void rect(bool fill, float x, float y, int w, int h)

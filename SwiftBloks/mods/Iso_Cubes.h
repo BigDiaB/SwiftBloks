@@ -26,9 +26,9 @@ void setOffset(int x, int y)
     OFFSET.y = y;
 }
 
-void drawCube(float x, float y, float z, SDL_Surface* tex)
+void drawCube(float x, float y, float z, SDL_Surface* surf)
 {
-    draw(OFFSET.x  + x * CUBE_HALF_SURFACE_HEIGHT - y * CUBE_HALF_SURFACE_HEIGHT, OFFSET.y + x * CUBE_HALF_SURFACE_WIDTH + y * CUBE_HALF_SURFACE_WIDTH - z * Z_AXIS_VALUE, tex);
+    draw(OFFSET.x  + x * CUBE_HALF_SURFACE_HEIGHT - y * CUBE_HALF_SURFACE_HEIGHT, OFFSET.y + x * CUBE_HALF_SURFACE_WIDTH + y * CUBE_HALF_SURFACE_WIDTH - z * Z_AXIS_VALUE, surf);
 }
 
 void drawCube(float x, float y, float z)
@@ -41,13 +41,22 @@ void drawCubeCollider(float x, float y, float z)
     rect(false,OFFSET.x  + x * CUBE_HALF_SURFACE_HEIGHT - y * CUBE_HALF_SURFACE_HEIGHT, OFFSET.y + x * CUBE_HALF_SURFACE_WIDTH + y * CUBE_HALF_SURFACE_WIDTH - z * Z_AXIS_VALUE, 20,26);
 }
 
+void drawCube(image &img, float x, float y, float z)
+{
+    draw(OFFSET.x  + x * CUBE_HALF_SURFACE_HEIGHT - y * CUBE_HALF_SURFACE_HEIGHT, OFFSET.y + x * CUBE_HALF_SURFACE_WIDTH + y * CUBE_HALF_SURFACE_WIDTH - z * Z_AXIS_VALUE, &img);
+}
+
 class CUBE: public body
 {
+protected:
+    vec2f vel;
+    float speed = 0.6;
 public:
+    image img;
     void update(float dt) override
     {
-        pos.x += (vel.x * dt) * speed;
-        pos.y += (vel.y * dt) * speed;
+        pos.x += ((vel.x) * speed) * dt;
+        pos.y += ((vel.y) * speed) * dt;
         vel.x *= pow(0.002, dt);
         vel.y *= pow(0.002, dt);
         if (isDown(SDLK_w) and not isDown(SDLK_s))
@@ -101,7 +110,7 @@ public:
     
     void draw() override
     {
-        drawCube(pos.x, pos.y, pos.z);
+        drawCube(img,pos.x, pos.y, pos.z);
     }
 };
 
@@ -119,18 +128,19 @@ public:
     void add(int x, int y, int z)
     {
         CUBE temp;
-        temp.setPos(x, y, z);
+        temp.setPos(x + pos.x * dimensions[0], y + pos.y * dimensions[1], z + pos.z * dimensions[2]);
+        temp.img.set(MISSING_CUBE_TEXTURE_PATH);
         bloks[fill] = temp;
         fill++;
     }
     
     void sort()
     {
-        for (int z = 0; z < dimensions[2]; z++)
+        for (int z = pos.z * dimensions[2]; z < dimensions[2] + pos.z * dimensions[2]; z++)
         {
-            for (int y = 0; y < dimensions[1]; y++)
+            for (int y = pos.y * dimensions[1]; y < dimensions[1] + pos.y * dimensions[1]; y++)
             {
-                for (int x = 0; x < dimensions[0]; x++)
+                for (int x = pos.x * dimensions[0]; x < dimensions[0] + pos.x * dimensions[0] ; x++)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -159,20 +169,28 @@ public:
         }
     }
     
+    void drawCollider()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (&bloks_sorted[i] != NULL)
+            {
+                drawCubeCollider(bloks_sorted[i].getPos().x + pos.x * dimensions[0], bloks_sorted[i].getPos().y + pos.y * dimensions[1], bloks_sorted[i].getPos().z + pos.z * dimensions[2]);
+            }
+        }
+    }
+    
     void draw()
     {
         for (int i = 0; i < size; i++)
         {
             if (&bloks_sorted[i] != NULL)
             {
-                drawCube(bloks_sorted[i].getPos().x + pos.x * dimensions[0], bloks_sorted[i].getPos().y + pos.y * dimensions[1], bloks_sorted[i].getPos().z + pos.z * dimensions[2]);
+                bloks_sorted[i].draw();
             }
         }
     }
 };
-
-
-
 
 
 

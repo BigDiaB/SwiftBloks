@@ -55,6 +55,7 @@
 		4FB8E7042614BBE100C47AFF /* SwiftBloks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBloks.h; sourceTree = "<group>"; };
 		4FC53666261C51290098EB30 /* Collisions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Collisions.h; sourceTree = "<group>"; };
 		4FC53668261C52A70098EB30 /* Base_body.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base_body.h; sourceTree = "<group>"; };
+		4FDFC3C2262776CE0066415B /* table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
 		4FE907D126163D630041C543 /* loop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loop.h; sourceTree = "<group>"; };
 		4FE907D226164F160041C543 /* load.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = load.h; sourceTree = "<group>"; };
 		4FE907D326165ECC0041C543 /* NOT_FOUND_ISO_CUBE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOT_FOUND_ISO_CUBE.png; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 				4FB452BB260C9BFB00758A2F /* util.h */,
 				4FE907D126163D630041C543 /* loop.h */,
 				4FE907D226164F160041C543 /* load.h */,
+				4FDFC3C2262776CE0066415B /* table.h */,
 			);
 			path = SwiftBloks;
 			sourceTree = "<group>";
